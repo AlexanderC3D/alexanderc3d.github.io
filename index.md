@@ -2,20 +2,47 @@
 layout: default
 ---
 
-# Welcome to My Engineering Portfolio
+# Alexander Chen
 
-Hello! I'm an engineer passionate about building innovative solutions and sharing knowledge about software development and engineering practices.
+Introduction & Description of site goes here.
+Line 2
+Line 3
 
-## About This Site
+## Mechatronics (ME 218 A/B/C @Stanford)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+{% include project-card.html 
+  title="PROJECT TITLE"
+  description="description"
+  image="/assets/images/placeholder.jpg"
+  link="https://example.com"
+%}
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+{% include project-card.html 
+  title="PROJECT TITLE"
+  description="description"
+  image="/assets/images/placeholder.jpg"
+  link="https://example.com"
+%}
 
-## Featured Projects
+{% include project-card.html 
+  title="PROJECT TITLE"
+  description="description"
+  image="/assets/images/placeholder.jpg"
+  link="https://example.com"
+%}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Check back soon for updates on my latest projects and technical deep-dives!
+## Robotics (ME 314/324 @Stanford)
 
-## Let's Connect
+{% include project-card.html 
+  title="PROJECT TITLE"
+  description="description"
+  image="/assets/images/placeholder.jpg"
+  link="https://example.com"
+%}
 
-Feel free to explore my work and get in touch if you'd like to collaborate or discuss engineering topics.
+{% include project-card.html 
+  title="PROJECT TITLE"
+  description="description"
+  image="/assets/images/placeholder.jpg"
+  link="https://example.com"
+%}
