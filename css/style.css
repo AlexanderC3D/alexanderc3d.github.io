@@ -67,8 +67,13 @@ main > p {
 /* Category Sections */
 .category-section {
     padding: 40px;
-    margin-bottom: 40px;
+    margin: 10px;
     border-radius: 4px;
+    transition: box-shadow 0.3s ease;
+}
+
+.category-section:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
 }
 
 .category-mechatronics {
@@ -176,6 +181,7 @@ main > p {
 
     .category-section {
         padding: 30px 20px;
+        margin: 10px;
     }
 
     .category-section h2 {
