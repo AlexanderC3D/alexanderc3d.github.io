@@ -15,7 +15,7 @@ Line 3
     {% include project-card.html 
       title="PROJECT TITLE"
       description="description"
-      image="/assets/images/placeholder.jpg"
+      image="/assets/images/me218a_img1.png"
       link="https://example.com"
     %}
   </div>
@@ -24,7 +24,7 @@ Line 3
     {% include project-card.html 
       title="PROJECT TITLE"
       description="description"
-      image="/assets/images/placeholder.jpg"
+      image="/assets/images/me218a_img1.png"
       link="https://example.com"
     %}
   </div>
@@ -33,7 +33,7 @@ Line 3
     {% include project-card.html 
       title="PROJECT TITLE"
       description="description"
-      image="/assets/images/placeholder.jpg"
+      image="/assets/images/me218a_img1.png"
       link="https://example.com"
     %}
   </div>
@@ -46,7 +46,7 @@ Line 3
     {% include project-card.html 
       title="PROJECT TITLE"
       description="description"
-      image="/assets/images/placeholder.jpg"
+      image="/assets/images/me218a_img1.png"
       link="https://example.com"
     %}
   </div>
@@ -55,7 +55,7 @@ Line 3
     {% include project-card.html 
       title="PROJECT TITLE"
       description="description"
-      image="/assets/images/placeholder.jpg"
+      image="/assets/images/me218a_img1.png"
       link="https://example.com"
     %}
   </div>
