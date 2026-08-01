@@ -109,11 +109,16 @@ main > p {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 0;
     overflow: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover {
+    opacity: 0.8;
 }
 
 .project-card-content {
     flex: 1;
-    background-color: #f0d9d9;
+    background-color: #fff;
     padding: 40px 35px;
     display: flex;
     flex-direction: column;
@@ -123,7 +128,6 @@ main > p {
 
 .project-card-image {
     width: 50%;
-    background-color: #e74c3c;
     display: flex;
     align-items: center;
     justify-content: center;
