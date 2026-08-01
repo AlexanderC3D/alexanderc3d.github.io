@@ -128,9 +128,8 @@ main > p {
     align-items: center;
     justify-content: center;
     min-height: 250px;
-    color: #c0392b;
-    font-size: 1.2em;
     overflow: hidden;
+    aspect-ratio: 16 / 9;
 }
 
 .project-card-image img {
@@ -201,6 +200,7 @@ main > p {
     .project-card-image {
         width: 100%;
         min-height: 200px;
+        aspect-ratio: 16 / 9;
     }
 }
 
