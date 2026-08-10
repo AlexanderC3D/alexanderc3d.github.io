@@ -12,12 +12,18 @@ A selection of past projects I've worked on as a mechanical engineer.
   <h2>Mechatronics (ME 218 A/B/C @Stanford)</h2>
   
   <div class="project-wrapper">
-    {% include project-card.html 
-      title="Triple Tank Trouble"
-      description="A time-attack arcade-style minigame, where players manage the fill levels of three steam tanks on a rotating turn table. Developed in 10 days as part of Stanford's ME 218A mechatronics course."
-      image="/assets/images/me218a_img1.png"
-      link="https://sites.google.com/stanford.edu/me218-3tt/home"
-    %}
+    <div class="project-card">
+      <div class="project-card-content">
+        <div>
+          <h3 class="project-card-title">Triple Tank Trouble</h3>
+          <p class="project-card-description">A time-attack arcade-style minigame, where players manage the fill levels of three steam tanks on a rotating turn table. Developed in 10 days as part of Stanford's ME 218A mechatronics course.</p>
+        </div>
+        <a href="https://sites.google.com/stanford.edu/me218-3tt/home" class="project-card-link" target="_blank">→ Link to Website</a>
+      </div>
+      <div class="project-card-image">
+        {% include carousel.html items="/assets/images/me218a_img1.png,/assets/images/me218a_img2.jpg,1H_VyXOeG2mYMgp75p5HEsVf0mJ2VLpK7" %}
+      </div>
+    </div>
   </div>
 
   <div class="project-wrapper">
