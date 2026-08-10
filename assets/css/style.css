@@ -180,7 +180,7 @@ main > p {
 .carousel-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 3;
 }
 
 .carousel-item {
@@ -238,7 +238,7 @@ main > p {
 
 .carousel-dots {
     position: absolute;
-    bottom: -40px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -271,7 +271,7 @@ main > p {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: rgba(0, 0, 0, 1);
     z-index: 1000;
 }
 
