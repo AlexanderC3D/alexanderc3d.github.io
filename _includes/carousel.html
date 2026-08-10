@@ -1,0 +1,57 @@
+<div class="carousel">
+  <div class="carousel-container">
+    {% assign items = include.items | split: ',' %}
+    {% for item in items %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        {% if item contains 'drive.google.com' %}
+          <!-- Google Drive Video -->
+          <iframe class="carousel-video" src="https://drive.google.com/file/d/{{ item | split: '/d/' | last | split: '/' | first }}/preview" allow="autoplay"></iframe>
+        {% else %}
+          <!-- Image -->
+          <img src="{{ item }}" alt="Project carousel item" class="carousel-image">
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Navigation Arrows -->
+  <button class="carousel-arrow carousel-prev" onclick="changeSlide(-1)">&#10094;</button>
+  <button class="carousel-arrow carousel-next" onclick="changeSlide(1)">&#10095;</button>
+
+  <!-- Dot Indicators -->
+  <div class="carousel-dots">
+    {% for item in items %}
+      <span class="dot {% if forloop.first %}active{% endif %}" onclick="currentSlide({{ forloop.index }})"></span>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  let currentIndex = 1;
+  
+  function changeSlide(n) {
+    showSlide(currentIndex += n);
+  }
+  
+  function currentSlide(n) {
+    showSlide(currentIndex = n);
+  }
+  
+  function showSlide(n) {
+    const slides = document.querySelectorAll('.carousel-item');
+    const dots = document.querySelectorAll('.dot');
+    
+    if (n > slides.length) {
+      currentIndex = 1;
+    }
+    if (n < 1) {
+      currentIndex = slides.length;
+    }
+    
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    slides[currentIndex - 1].classList.add('active');
+    dots[currentIndex - 1].classList.add('active');
+  }
+</script>
