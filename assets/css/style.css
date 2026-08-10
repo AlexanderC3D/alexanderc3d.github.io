@@ -13,7 +13,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -27,7 +27,7 @@ header {
 }
 
 header .container {
-    max-width: 800px;
+    max-width: 1000px;
 }
 
 header h1 {
@@ -110,10 +110,6 @@ main > p {
     border-radius: 0;
     overflow: hidden;
     transition: opacity 0.3s ease;
-}
-
-.project-card:hover {
-    opacity: 0.8;
 }
 
 .project-card-content {
