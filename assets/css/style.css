@@ -174,12 +174,13 @@ main > p {
     width: 100%;
     background-color: #f0f0f0;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .carousel-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 16 / 9;
 }
 
 .carousel-item {
@@ -237,7 +238,7 @@ main > p {
 
 .carousel-dots {
     position: absolute;
-    bottom: 15px;
+    bottom: -40px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -249,17 +250,146 @@ main > p {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .dot.active {
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 1);
 }
 
 .dot:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Fullscreen Overlay */
+.carousel-fullscreen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+}
+
+.carousel-fullscreen.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-fullscreen-content {
+    position: relative;
+    width: 90%;
+    max-width: 1400px;
+    aspect-ratio: 16 / 9;
+}
+
+.carousel-fullscreen-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-fullscreen-item {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.carousel-fullscreen-item.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-fullscreen-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.carousel-fullscreen-video {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.carousel-fullscreen-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+    border: none;
+    padding: 16px 20px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-fullscreen-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.carousel-fullscreen-prev {
+    left: 20px;
+}
+
+.carousel-fullscreen-next {
+    right: 20px;
+}
+
+.carousel-fullscreen-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.carousel-fullscreen-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-fullscreen-dot.active {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.carousel-fullscreen-dot:hover {
     background-color: rgba(255, 255, 255, 0.8);
+}
+
+.carousel-fullscreen-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 11;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-fullscreen-close:hover {
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 /* Responsive Design */
@@ -304,6 +434,11 @@ main > p {
     .carousel-arrow {
         padding: 10px 14px;
         font-size: 16px;
+    }
+
+    .carousel-fullscreen-arrow {
+        padding: 12px 16px;
+        font-size: 18px;
     }
 }
 
