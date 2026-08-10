@@ -3,12 +3,17 @@
     {% assign items = include.items | split: ',' %}
     {% for item in items %}
       <div class="carousel-item {% if forloop.first %}active{% endif %}">
-        {% if item contains 'drive.google.com' %}
-          <!-- Google Drive Video -->
-          <iframe class="carousel-video" src="https://drive.google.com/file/d/{{ item | split: '/d/' | last | split: '/' | first }}/preview" allow="autoplay"></iframe>
+        {% if item contains 'drive.google.com' or item contains '/' %}
+          <!-- Regular file path or Drive link -->
+          {% if item contains '/' %}
+            <!-- Image file -->
+            <img src="{{ item }}" alt="Project carousel item" class="carousel-image">
+          {% else %}
+            <!-- This shouldn't happen with current logic -->
+          {% endif %}
         {% else %}
-          <!-- Image -->
-          <img src="{{ item }}" alt="Project carousel item" class="carousel-image">
+          <!-- Google Drive file ID - embed as video -->
+          <iframe class="carousel-video" src="https://drive.google.com/file/d/{{ item }}/preview" allow="autoplay"></iframe>
         {% endif %}
       </div>
     {% endfor %}
