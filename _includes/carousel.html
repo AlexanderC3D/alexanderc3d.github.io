@@ -1,4 +1,4 @@
-<div class="carousel" onclick="openFullscreen()">
+<div class="carousel" onclick="openFullscreen()" onwheel="handleScroll(event)" tabindex="0" onkeydown="handleKeypress(event)">
   <div class="carousel-container">
     {% assign items = include.items | split: ',' %}
     {% for item in items %}
@@ -61,14 +61,17 @@
 <script>
   let currentIndex = 1;
   let fullscreenIndex = 1;
+  let isTransitioning = false;
   
   function changeSlide(n, event) {
     if (event) event.stopPropagation();
+    if (isTransitioning) return;
     showSlide(currentIndex += n);
   }
   
   function currentSlide(n, event) {
     if (event) event.stopPropagation();
+    if (isTransitioning) return;
     showSlide(currentIndex = n);
   }
   
@@ -83,11 +86,44 @@
       currentIndex = slides.length;
     }
     
-    slides.forEach(slide => slide.classList.remove('active'));
+    isTransitioning = true;
+    
+    slides.forEach(slide => {
+      slide.classList.remove('active');
+      slide.style.opacity = '0';
+    });
     dots.forEach(dot => dot.classList.remove('active'));
     
-    slides[currentIndex - 1].classList.add('active');
+    const activeSlide = slides[currentIndex - 1];
+    activeSlide.classList.add('active');
+    activeSlide.style.opacity = '1';
     dots[currentIndex - 1].classList.add('active');
+    
+    setTimeout(() => {
+      isTransitioning = false;
+    }, 300);
+  }
+
+  function handleScroll(event) {
+    event.preventDefault();
+    
+    if (event.deltaY > 0) {
+      // Scroll down = next image
+      changeSlide(1, null);
+    } else if (event.deltaY < 0) {
+      // Scroll up = previous image
+      changeSlide(-1, null);
+    }
+  }
+
+  function handleKeypress(event) {
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      changeSlide(1, null);
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      changeSlide(-1, null);
+    }
   }
 
   function openFullscreen() {
