@@ -6,6 +6,72 @@
     </div>
     <a href="{{ include.link }}" class="project-card-link" target="_blank">→ Link to Website</a>
   </div>
+  
+  <!-- Carousel Section (optional, only if items are provided) -->
+  {% if include.items %}
+  <div class="project-card-carousel" data-carousel-id="carousel-{{ include.id }}">
+    <div class="carousel" tabindex="0">
+      <div class="carousel-container">
+        {% assign items = include.items | split: ',' %}
+        {% for item in items %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            {% if item contains '/' %}
+              <!-- Image file -->
+              <img src="{{ item }}" alt="Project carousel item" class="carousel-image">
+            {% else %}
+              <!-- Google Drive file ID - embed as video -->
+              <iframe class="carousel-video" src="https://drive.google.com/file/d/{{ item }}/preview" allow="autoplay" style="transform: scale(1.33); transform-origin: top center;"></iframe>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button class="carousel-arrow carousel-prev">&#10094;</button>
+      <button class="carousel-arrow carousel-next">&#10095;</button>
+
+      <!-- Dot Indicators -->
+      <div class="carousel-dots">
+        {% for item in items %}
+          <span class="dot {% if forloop.first %}active{% endif %}"></span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Fullscreen Overlay -->
+    <div class="carousel-fullscreen">
+      <button class="carousel-fullscreen-close">✕</button>
+      <div class="carousel-fullscreen-content">
+        <div class="carousel-fullscreen-container">
+          {% assign items = include.items | split: ',' %}
+          {% for item in items %}
+            <div class="carousel-fullscreen-item {% if forloop.first %}active{% endif %}">
+              {% if item contains '/' %}
+                <!-- Image file -->
+                <img src="{{ item }}" alt="Project carousel item" class="carousel-fullscreen-image">
+              {% else %}
+                <!-- Google Drive file ID - embed as video -->
+                <iframe class="carousel-fullscreen-video" src="https://drive.google.com/file/d/{{ item }}/preview" allow="autoplay" style="transform: scale(1.33); transform-origin: top center;"></iframe>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button class="carousel-fullscreen-arrow carousel-fullscreen-prev">&#10094;</button>
+        <button class="carousel-fullscreen-arrow carousel-fullscreen-next">&#10095;</button>
+
+        <!-- Dot Indicators -->
+        <div class="carousel-fullscreen-dots">
+          {% for item in items %}
+            <span class="carousel-fullscreen-dot {% if forloop.first %}active{% endif %}"></span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <!-- Static image section if no carousel items provided -->
   <div class="project-card-image">
     {% if include.image %}
       <img src="{{ include.image }}" alt="{{ include.title }}">
@@ -13,4 +79,5 @@
       <img src="/assets/images/me218a_img1.png" alt="{{ include.title }}">
     {% endif %}
   </div>
+  {% endif %}
 </div>
