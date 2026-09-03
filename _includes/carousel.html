@@ -1,173 +1,62 @@
-<div class="carousel" onclick="openFullscreen()" onwheel="handleScroll(event)" tabindex="0" onkeydown="handleKeypress(event)">
-  <div class="carousel-container">
-    {% assign items = include.items | split: ',' %}
-    {% for item in items %}
-      <div class="carousel-item {% if forloop.first %}active{% endif %}">
-        {% if item contains '/' %}
-          <!-- Image file -->
-          <img src="{{ item }}" alt="Project carousel item" class="carousel-image">
-        {% else %}
-          <!-- Google Drive file ID - embed as video -->
-          <iframe class="carousel-video" src="https://drive.google.com/file/d/{{ item }}/preview" allow="autoplay" style="transform: scale(1.33); transform-origin: top center;"></iframe>
-        {% endif %}
-      </div>
-    {% endfor %}
-  </div>
-
-  <!-- Navigation Arrows -->
-  <button class="carousel-arrow carousel-prev" onclick="changeSlide(-1, event)">&#10094;</button>
-  <button class="carousel-arrow carousel-next" onclick="changeSlide(1, event)">&#10095;</button>
-
-  <!-- Dot Indicators -->
-  <div class="carousel-dots">
-    {% for item in items %}
-      <span class="dot {% if forloop.first %}active{% endif %}" onclick="currentSlide({{ forloop.index }}, event)"></span>
-    {% endfor %}
-  </div>
-</div>
-
-<!-- Fullscreen Overlay -->
-<div class="carousel-fullscreen" id="carouselFullscreen">
-  <button class="carousel-fullscreen-close" onclick="closeFullscreen()">✕</button>
-  <div class="carousel-fullscreen-content">
-    <div class="carousel-fullscreen-container">
+<!-- Standalone Carousel Component (for use outside of project cards) -->
+<div class="carousel-standalone" data-carousel-id="carousel-{{ include.id }}">
+  <div class="carousel" tabindex="0">
+    <div class="carousel-container">
       {% assign items = include.items | split: ',' %}
       {% for item in items %}
-        <div class="carousel-fullscreen-item {% if forloop.first %}active{% endif %}">
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
           {% if item contains '/' %}
             <!-- Image file -->
-            <img src="{{ item }}" alt="Project carousel item" class="carousel-fullscreen-image">
+            <img src="{{ item }}" alt="Carousel item" class="carousel-image">
           {% else %}
             <!-- Google Drive file ID - embed as video -->
-            <iframe class="carousel-fullscreen-video" src="https://drive.google.com/file/d/{{ item }}/preview" allow="autoplay" style="transform: scale(1.33); transform-origin: top center;"></iframe>
+            <iframe class="carousel-video" src="https://drive.google.com/file/d/{{ item }}/preview" allow="autoplay" style="transform: scale(1.33); transform-origin: top center;"></iframe>
           {% endif %}
         </div>
       {% endfor %}
     </div>
 
     <!-- Navigation Arrows -->
-    <button class="carousel-fullscreen-arrow carousel-fullscreen-prev" onclick="changeFullscreenSlide(-1)">&#10094;</button>
-    <button class="carousel-fullscreen-arrow carousel-fullscreen-next" onclick="changeFullscreenSlide(1)">&#10095;</button>
+    <button class="carousel-arrow carousel-prev">&#10094;</button>
+    <button class="carousel-arrow carousel-next">&#10095;</button>
 
     <!-- Dot Indicators -->
-    <div class="carousel-fullscreen-dots">
+    <div class="carousel-dots">
       {% for item in items %}
-        <span class="carousel-fullscreen-dot {% if forloop.first %}active{% endif %}" onclick="currentFullscreenSlide({{ forloop.index }})"></span>
+        <span class="dot {% if forloop.first %}active{% endif %}"></span>
       {% endfor %}
     </div>
   </div>
+
+  <!-- Fullscreen Overlay -->
+  <div class="carousel-fullscreen">
+    <button class="carousel-fullscreen-close">✕</button>
+    <div class="carousel-fullscreen-content">
+      <div class="carousel-fullscreen-container">
+        {% assign items = include.items | split: ',' %}
+        {% for item in items %}
+          <div class="carousel-fullscreen-item {% if forloop.first %}active{% endif %}">
+            {% if item contains '/' %}
+              <!-- Image file -->
+              <img src="{{ item }}" alt="Carousel item" class="carousel-fullscreen-image">
+            {% else %}
+              <!-- Google Drive file ID - embed as video -->
+              <iframe class="carousel-fullscreen-video" src="https://drive.google.com/file/d/{{ item }}/preview" allow="autoplay" style="transform: scale(1.33); transform-origin: top center;"></iframe>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button class="carousel-fullscreen-arrow carousel-fullscreen-prev">&#10094;</button>
+      <button class="carousel-fullscreen-arrow carousel-fullscreen-next">&#10095;</button>
+
+      <!-- Dot Indicators -->
+      <div class="carousel-fullscreen-dots">
+        {% for item in items %}
+          <span class="carousel-fullscreen-dot {% if forloop.first %}active{% endif %}"></span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </div>
-
-<script>
-  let currentIndex = 1;
-  let fullscreenIndex = 1;
-  let isTransitioning = false;
-  
-  function changeSlide(n, event) {
-    if (event) event.stopPropagation();
-    if (isTransitioning) return;
-    showSlide(currentIndex += n);
-  }
-  
-  function currentSlide(n, event) {
-    if (event) event.stopPropagation();
-    if (isTransitioning) return;
-    showSlide(currentIndex = n);
-  }
-  
-  function showSlide(n) {
-    const slides = document.querySelectorAll('.carousel-item');
-    const dots = document.querySelectorAll('.dot');
-    
-    if (n > slides.length) {
-      currentIndex = 1;
-    }
-    if (n < 1) {
-      currentIndex = slides.length;
-    }
-    
-    isTransitioning = true;
-    
-    slides.forEach(slide => {
-      slide.classList.remove('active');
-      slide.style.opacity = '0';
-    });
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    const activeSlide = slides[currentIndex - 1];
-    activeSlide.classList.add('active');
-    activeSlide.style.opacity = '1';
-    dots[currentIndex - 1].classList.add('active');
-    
-    setTimeout(() => {
-      isTransitioning = false;
-    }, 300);
-  }
-
-  function handleScroll(event) {
-    event.preventDefault();
-    
-    if (event.deltaY > 0) {
-      // Scroll down = next image
-      changeSlide(1, null);
-    } else if (event.deltaY < 0) {
-      // Scroll up = previous image
-      changeSlide(-1, null);
-    }
-  }
-
-  function handleKeypress(event) {
-    if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      changeSlide(1, null);
-    } else if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      changeSlide(-1, null);
-    }
-  }
-
-  function openFullscreen() {
-    const fullscreen = document.getElementById('carouselFullscreen');
-    fullscreenIndex = currentIndex;
-    fullscreen.classList.add('active');
-    showFullscreenSlide(fullscreenIndex);
-  }
-
-  function closeFullscreen() {
-    const fullscreen = document.getElementById('carouselFullscreen');
-    fullscreen.classList.remove('active');
-  }
-
-  function changeFullscreenSlide(n) {
-    showFullscreenSlide(fullscreenIndex += n);
-  }
-
-  function currentFullscreenSlide(n) {
-    showFullscreenSlide(fullscreenIndex = n);
-  }
-
-  function showFullscreenSlide(n) {
-    const slides = document.querySelectorAll('.carousel-fullscreen-item');
-    const dots = document.querySelectorAll('.carousel-fullscreen-dot');
-    
-    if (n > slides.length) {
-      fullscreenIndex = 1;
-    }
-    if (n < 1) {
-      fullscreenIndex = slides.length;
-    }
-    
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    slides[fullscreenIndex - 1].classList.add('active');
-    dots[fullscreenIndex - 1].classList.add('active');
-  }
-
-  // Close fullscreen on escape key
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-      closeFullscreen();
-    }
-  });
-</script>
