@@ -7,7 +7,7 @@
     <a href="{{ include.link }}" class="project-card-link" target="_blank">→ Link to Website</a>
   </div>
   
-  <!-- Carousel Section (optional, only if items are provided) -->
+  <!-- Carousel Section (if items are provided) -->
   {% if include.items %}
   <div class="project-card-carousel" data-carousel-id="carousel-{{ include.id }}">
     <div class="carousel" tabindex="0">
@@ -71,7 +71,7 @@
     </div>
   </div>
   {% else %}
-  <!-- Static image section if no carousel items provided -->
+  <!-- Static Image Section (if no carousel items) -->
   <div class="project-card-image">
     {% if include.image %}
       <img src="{{ include.image }}" alt="{{ include.title }}">
