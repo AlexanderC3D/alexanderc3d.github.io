@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/css/carousel.css' | relative_url }}">
 </head>
 <body>
     <main>
@@ -18,5 +19,8 @@
             <p>&copy; 2026 {{ site.title }}. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Carousel JavaScript - Load at end of body for optimal performance -->
+    <script src="{{ '/js/carousel.js' | relative_url }}"></script>
 </body>
 </html>
