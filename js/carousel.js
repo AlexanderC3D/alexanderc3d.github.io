@@ -18,21 +18,25 @@ class Carousel {
   }
 
   initializeCarousel() {
-    // Get all interactive elements within this carousel
-    this.slides = this.container.querySelectorAll('.carousel-item');
-    this.dots = this.container.querySelectorAll('.dot');
-    this.prevBtn = this.container.querySelector('.carousel-prev');
-    this.nextBtn = this.container.querySelector('.carousel-next');
-    this.fullscreenOverlay = this.container.querySelector('.carousel-fullscreen');
-    this.fullscreenSlides = this.container.querySelectorAll('.carousel-fullscreen-item');
-    this.fullscreenDots = this.container.querySelectorAll('.carousel-fullscreen-dot');
+    // Get all interactive elements within this specific carousel container
+    // Use querySelector with child combinator to scope to this carousel only
+    this.carousel = this.container.querySelector('.carousel');
+    this.slides = this.container.querySelectorAll(':scope .carousel-item');
+    this.dots = this.container.querySelectorAll(':scope .dot');
+    this.prevBtn = this.container.querySelector(':scope .carousel-prev');
+    this.nextBtn = this.container.querySelector(':scope .carousel-next');
+    this.fullscreenOverlay = this.container.querySelector(':scope .carousel-fullscreen');
+    this.fullscreenSlides = this.container.querySelectorAll(':scope .carousel-fullscreen-item');
+    this.fullscreenDots = this.container.querySelectorAll(':scope .carousel-fullscreen-dot');
 
     if (!this.slides.length) return;
 
-    // Add event listeners
-    this.container.addEventListener('click', (e) => this.handleContainerClick(e));
-    this.container.addEventListener('wheel', (e) => this.handleScroll(e));
-    this.container.addEventListener('keydown', (e) => this.handleKeypress(e));
+    // Add event listeners to the carousel element
+    if (this.carousel) {
+      this.carousel.addEventListener('click', (e) => this.handleContainerClick(e));
+      this.carousel.addEventListener('wheel', (e) => this.handleScroll(e));
+      this.carousel.addEventListener('keydown', (e) => this.handleKeypress(e));
+    }
 
     if (this.prevBtn) {
       this.prevBtn.addEventListener('click', (e) => this.changeSlide(-1, e));
@@ -52,7 +56,7 @@ class Carousel {
     });
 
     // Fullscreen close button
-    const closeBtn = this.container.querySelector('.carousel-fullscreen-close');
+    const closeBtn = this.container.querySelector(':scope .carousel-fullscreen-close');
     if (closeBtn) {
       closeBtn.addEventListener('click', () => this.closeFullscreen());
     }
@@ -72,7 +76,7 @@ class Carousel {
   handleContainerClick(e) {
     // Only open fullscreen if clicking the carousel itself, not buttons/dots
     if (
-      e.target === this.container || 
+      e.target === this.carousel || 
       e.target.classList.contains('carousel-image') ||
       e.target.classList.contains('carousel-video')
     ) {
