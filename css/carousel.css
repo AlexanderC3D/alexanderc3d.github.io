@@ -256,8 +256,13 @@
 
 /* Project Card with Carousel */
 .project-card-carousel {
-  width: 100%;
-  margin-top: 16px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
 }
 
 /* Responsive Design */
@@ -295,6 +300,12 @@
   .carousel-fullscreen-close {
     padding: 8px 12px;
     font-size: 24px;
+  }
+
+  .project-card-carousel {
+    width: 100%;
+    min-height: 200px;
+    aspect-ratio: 3 / 2;
   }
 }
 
